@@ -6,7 +6,7 @@ const {
 const {
     clientId,
     token
-} = require('./config.json');
+} = require('./configs/config.json');
 const fs = require('node:fs');
 const path = require('node:path');
 const Discord = require("discord.js")
