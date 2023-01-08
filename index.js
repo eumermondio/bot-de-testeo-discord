@@ -15,15 +15,6 @@ const {
     Collection,
     Events
 } = require('discord.js');
-const {
-    userInfo
-} = require('node:os');
-const {
-    ServerResponse
-} = require('node:http');
-const {
-    table
-} = require('node:console');
 const client = new Discord.Client({
     intents: ["AutoModerationConfiguration", "AutoModerationExecution", "DirectMessageReactions", "DirectMessageTyping", "DirectMessages", "GuildBans", "GuildEmojisAndStickers", "GuildIntegrations", "GuildInvites", "GuildMembers", "GuildMessageReactions", "GuildMessageTyping", "GuildMessages", "GuildPresences", "GuildScheduledEvents", "GuildVoiceStates", "GuildWebhooks", "Guilds", "MessageContent"],
 });
@@ -49,7 +40,8 @@ client.on("ready", () => {
     client.user.setPresence({
         status: "dnd"
     });
-    client.user.setActivity("bot de testeo | creador eumermondio#6071")
+    client.user.setActivity("bot de testeo | creador eumermondio#6071");
+    cargarComandos();
 })
 
 // Eventos ( Comandos / )
@@ -77,7 +69,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 // Evento de cuando entra el bot a un server
 client.on("guildCreate", server => {
     crearCanalDeAvisos(server);
-    cargarComandos();
 })
 
 // Evento de mensajes
@@ -85,6 +76,25 @@ client.on("messageCreate", (message) => {
     avisoGeneral(message);
     avisoUpdates(message);
     buscaminas(message);
+    /* Log
+    let canalDeLog = client.channels.cache.find(channel => channel.id === "1061730076544204800");
+    if (!message.author.bot) {
+        const exampleEmbed = new EmbedBuilder()
+            .setColor(0x00FF00)
+            .setTitle(`**Nuevo mensaje en el canal ${message.channel.name} del server ${message.guild.name}**`)
+            .setAuthor({
+                name: message.author.username + "#" + message.author.discriminator,
+                iconURL: message.author.avatarURL()
+            })
+            .setDescription(message.content)
+            .setTimestamp()
+            .setFooter({
+                text: 'Sistema de logueo, creado por eumermondio#6071'
+            });
+        canalDeLog.send({
+            embeds: [exampleEmbed]
+        });
+    } */
 })
 
 // LogIn
